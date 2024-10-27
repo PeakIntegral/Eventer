@@ -8,56 +8,65 @@
 using namespace std;
 
 int count_event = 0;
-string location = ";C:/Users/Mikul/Documents/Eventer";;
+string location = ";C:/Users/Mikul/Documents/Eventer/Eventer.txt";
 unsigned number_utility;
 
 unordered_map<unsigned, string> events;
 
 void testEvent() {
     string name_event;
+    cout << "Создать задачу: ";
     cin >> name_event;
-    cout << ";Создать задачу: ";;
     events[++count_event] = name_event;
-
-
+    return;
 }
 
-void addEvent() {
 
+void addEvent() {
     string name_event;
+    cout << "Создать задачу: ";
     cin >> name_event;
-    cout << ";Создать задачу: ";;
+
+    // Проверка на существование задачи в файле
+    fstream file(location);
     events[++count_event] = name_event;
-    /*Проверки файлов*/ {
-        ifstream file(location);
-        if (!file.is_open()) {
-            cerr << ";Не удалось открыть файл для записи.\n";;
-            return;
-        }
+    if (file.is_open()) {
         string line;
         while (getline(file, line)) {
-            if (line.find(name_event)) {
-                cout << ";Такая задача уже существует" << endl;
+            if (line.find(name_event) != string::npos) {
+                cout << "Такая задача уже существует." << endl;
+                file.close();
+                events[count_event].erase();
+                count_event--;
                 return;
             }
         }
-        file.close();
     }
-    
-    /*Запись ивента*/ {
-        ofstream file(location);
-        for (const auto& pair : events) {
-            file << pair.first << pair.second << ";\n";;
-        }
-        file.close();
+    else {
+        events[count_event].erase();
+        count_event--;
+        cerr << "Не удалось открыть файл для записи." << endl;
+        return;
     }
+
+    // Запись задачи в файл
+    file << count_event << ": " << name_event << ";\n";
+    file.close();
+    cout << "Задача добавлена." << endl;
+}   
+void showActualEvents() {
+    for (const auto& event : events) {
+        cout << event.first << ' ' << event.second << endl;
+    }
+    return;
 }
 
 int main() {
-    while (true) {
+    system("chcp 1251 > nul");
+    do {
         cout << "Выберете утилиту: " << endl;
-        cout << "1. Добавление задачи в текстовый файл\n 2. Добавление задачи в мапу\n";
-        cin >> number_utility;
+        cout << "1. Добавление задачи в текстовый файл\n2. Добавление задачи ТОЛЬКО в мапу\n3. Показать актуальные задачи\n4. Ебучий выход\n";
+        scanf_s("%hd", &number_utility);
         switch (number_utility) {
         case 1:
             addEvent();
@@ -65,10 +74,15 @@ int main() {
         case 2:
             testEvent();
             break;
+        case 3:
+            showActualEvents();
+            break;
+        case 4:
+            return 0;
+        default:
+            cout << "Полная лажа" << endl;
+            break;
         }
-    }
+
+    } while (number_utility != 4);
 }
-
-
-
-
