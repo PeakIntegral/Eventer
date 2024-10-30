@@ -127,7 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="TaskBoard.cpp" />
     <ClCompile Include="Такая учёба.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TaskBoard.h" />
+    <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
