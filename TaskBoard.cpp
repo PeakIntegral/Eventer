@@ -1,8 +1,12 @@
+
 #include "TaskBoard.h"
 
-const string TaskBoard::location = "C:/Users/Mikul/Documents/Eventer/Eventer.txt";
+const string TaskBoard::const_file_path = "Documents//Eventer.txt";
+const string TaskBoard::full_file_path = string(getenv("USERPROFILE")) + "//" + TaskBoard::full_file_path;
 unsigned int count_event = 0;
-unordered_map<unsigned, string> TaskBoard::events;
+map<unsigned, string> TaskBoard::events;
+map<string, map<unsigned, string>> TaskBoard::board;
+
 
 void TaskBoard::addEvent(){
     string name_event;
@@ -10,7 +14,7 @@ void TaskBoard::addEvent(){
     cin >> name_event;
 
     // Проверка на существование задачи в файле
-    fstream file(location, ios::in | ios::out | ios::app); 
+    fstream file(TaskBoard::full_file_path, ios::in | ios::out | ios::app); 
     events[++count_event] = name_event;
 
     if (file.is_open()) {
@@ -54,7 +58,7 @@ void TaskBoard::showActualEvents() {
 }
 
 void TaskBoard::clearEventBoard(){
-    fstream file(location, ios::out | ios::trunc);
+    fstream file(full_file_path, ios::out | ios::trunc);
     cout << "Файл очищен от задач\n";
     file.close();
 }
