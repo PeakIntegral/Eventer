@@ -1,11 +1,11 @@
 
 #include "TaskBoard.h"
-
+//Проверка локали
 const string TaskBoard::const_file_path = "Documents//Eventer.txt";
 const string TaskBoard::full_file_path = string(getenv("USERPROFILE")) + "//" + TaskBoard::full_file_path;
 unsigned int count_event = 0;
-map<unsigned, string> TaskBoard::events;
-map<string, map<unsigned, string>> TaskBoard::board;
+vector<string> events;
+map<string, vector<string>> TaskBoard::board;
 
 
 void TaskBoard::addEvent(){
@@ -21,7 +21,7 @@ void TaskBoard::addEvent(){
         string line;
         while (getline(file, line)) {
             if (line.find(name_event) != string::npos) {
-                cout << "Такая задача уже существует." << endl;
+                cout << "Такая задача уже существует" << endl;
                 file.close();
                 events[count_event].erase();
                 count_event--;
