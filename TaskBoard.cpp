@@ -1,12 +1,10 @@
 
 #include "TaskBoard.h"
-//Проверка локали
 const string TaskBoard::const_file_path = "Documents//Eventer.txt";
 const string TaskBoard::full_file_path = string(getenv("USERPROFILE")) + "//" + TaskBoard::full_file_path;
 unsigned int count_event = 0;
-vector<string> events;
-map<string, vector<string>> TaskBoard::board;
-
+map<unsigned, string> TaskBoard::events;
+map<string, map<unsigned, string>> TaskBoard::board;
 
 void TaskBoard::addEvent(){
     string name_event;
