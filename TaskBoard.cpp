@@ -4,7 +4,14 @@ const string TaskBoard::const_file_path = "Documents//Eventer.txt";
 const string TaskBoard::full_file_path = string(getenv("USERPROFILE")) + "//" + TaskBoard::full_file_path;
 unsigned int count_event = 0;
 map<unsigned, string> TaskBoard::events;
+map<unsigned, string> TaskBoard::to_do_tasks; 
+map<unsigned, string> TaskBoard::tasks_in_develope;
+map<unsigned, string> TaskBoard::test_tasks;
+map<unsigned, string> TaskBoard::ready_tasks;
+map<unsigned, string> TaskBoard::droped_tasks;
 map<string, map<unsigned, string>> TaskBoard::board;
+
+
 
 void TaskBoard::addEvent(){
     string name_event;
@@ -49,7 +56,7 @@ void TaskBoard::testEvent() {
     cout << "Задача успешно создана\n";
 }
 
-void TaskBoard::showActualEvents() {
+void TaskBoard::testShowActualEvents() {
     for (const auto& event : events) {
         cout << event.first << ' ' << event.second << endl;
     }

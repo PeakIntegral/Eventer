@@ -19,7 +19,7 @@ int main() {
             task->testEvent();
             break;
         case '3':
-            task->showActualEvents();
+            task->testShowActualEvents();
             break;
         case '4':
             task->clearEventBoard();
@@ -32,12 +32,3 @@ int main() {
         }
     }
 }
-/*
-* 1. Банк новых задач
-* 2. В процессе разработки/исследования
-* 3. Тестируется
-* 4. Готово
-* 5. Заброшено
-
-
-*/
