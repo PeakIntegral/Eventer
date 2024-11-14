@@ -1,74 +1,32 @@
-﻿//#define _CRT_SECURE_NO_WARNINGS
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <stdio.h>
-#include <unordered_map>
-#include <stdbool.h>
-using namespace std;
+﻿#include "Utilities.h"
+#include "TaskBoard.h"
 
-int count_event = 0;
-string location = ";C:/Users/Mikul/Documents/Eventer";;
-unsigned number_utility;
-
-unordered_map<unsigned, string> events;
-
-void testEvent() {
-    string name_event;
-    cin >> name_event;
-    cout << ";Создать задачу: ";;
-    events[++count_event] = name_event;
-
-
-}
-
-void addEvent() {
-
-    string name_event;
-    cin >> name_event;
-    cout << ";Создать задачу: ";;
-    events[++count_event] = name_event;
-    /*Проверки файлов*/ {
-        ifstream file(location);
-        if (!file.is_open()) {
-            cerr << ";Не удалось открыть файл для записи.\n";;
-            return;
-        }
-        string line;
-        while (getline(file, line)) {
-            if (line.find(name_event)) {
-                cout << ";Такая задача уже существует" << endl;
-                return;
-            }
-        }
-        file.close();
-    }
-    
-    /*Запись ивента*/ {
-        ofstream file(location);
-        for (const auto& pair : events) {
-            file << pair.first << pair.second << ";\n";;
-        }
-        file.close();
-    }
-}
+unique_ptr<TaskBoard> task;
 
 int main() {
+    system("chcp 1251 > nul");
     while (true) {
-        cout << "Выберете утилиту: " << endl;
-        cout << "1. Добавление задачи в текстовый файл\n 2. Добавление задачи в мапу\n";
-        cin >> number_utility;
-        switch (number_utility) {
-        case 1:
-            addEvent();
+        std::cout << "Список предложенных вариантов:\n";
+        std::cout << "1. Добавление задачи в текстовый файл\n2. Показать актуальные задачи\n3. Очистка файла событий\nДля выхода из программы нажмите 'X'\n";
+        if (!task) { task = make_unique<TaskBoard>(); }
+        std::cout << "Выберете утилиту: \n";
+        switch (_getch()) {
+        case '1':
+            task->addEvent();
             break;
-        case 2:
-            testEvent();
+        case '2':
+            task->showActualEvents();
+            break;
+        case '3':
+            task->clearEventBoard();
+            break;
+        case '4':
+            task->removeEvent();
+        case 'x':
+            return 0;
+        default:
+            std::cout << "Полная лажа, покайся" << endl;
             break;
         }
     }
 }
-
-
-
-
