@@ -74,12 +74,10 @@ void TaskBoard::addEvent() {
                 std::cout << "Такая задача уже существует." << endl;
                 return;
             }
-            //if (stoi(line.substr(pos - 1)) > 0) { number_event = stoi(line.substr(pos - 1)); }
         }
     }
     events[++count_event] = name_event;
     if (pos == 0){
-        //line = to_string(count_event) + ". " + name_event;
         pos = '.';
     }
     needchanges = true;
