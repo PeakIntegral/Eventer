@@ -126,6 +126,7 @@ void TaskBoard::clearEventBoard(){
         events.clear();
         count_event = 0;
         needchanges = true;
+        cout << "Все сущеcтвующие задачи были удалены" << endl;
         break;
     case 'n':
     case 'N':
