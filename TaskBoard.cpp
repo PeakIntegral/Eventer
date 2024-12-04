@@ -55,7 +55,7 @@ bool TaskBoard::saveFile() {
     
     for (const auto& event : events) {
 //        cout << event.first << '.' << ' ' << event.second << endl;
-        outfile << event.first << '.' << ' ' << event.second << endl;
+        outfile << event.first << '.' << event.second << endl;
     }
 
     outfile.close();
