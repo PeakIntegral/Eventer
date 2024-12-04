@@ -4,6 +4,7 @@
 
 unique_ptr<TaskBoard> task;
 unique_ptr<Game> game;
+int action = 0;
 
 int main() {
     system("chcp 1251 > nul");
@@ -11,7 +12,7 @@ int main() {
         std::cout << "Список предложенных вариантов:\n";
         std::cout << "1. Добавление задачи в текстовый файл\n2. Показать актуальные задачи\n3. Удаление конкретной задачи из списка\n4. Очистка файла событий\n5. Запустить игру\nДля выхода из программы нажмите 'X'\n";
         if (!task) { task = make_unique<TaskBoard>(); }
-        std::cout << "Выберете утилиту: \n" << endl;
+        std::cout << "Выберете утилиту: \n";
         switch (_getch()) {
         case '1':
             task->addEvent();
@@ -39,8 +40,6 @@ int main() {
         }
         case 'x':
         case 'X':
-        case 'ч':
-        case 'Ч':
             return 0;
         default:
             std::cout << "Полная лажа, покайся" << endl;
